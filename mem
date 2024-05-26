@@ -1,0 +1,21 @@
+# принту для роботы бота
+import discord
+from discord.ext import commands
+import random 
+#префикс бота тоеть он будет реогировать если только напишишь с префиксом !
+intents = discord.Intents.default()
+intents.message_content = True
+bot = commands.Bot(command_prefix='!',intents=intents)
+
+#основная функцыя котороя высылает рандомно фотографию если напишишь !mem
+@bot.command()
+async def meme(ctx):
+    memes = ["мем 5.jpg", "мем потепление3.jpg", "мем потепление2.jpg","мем потепление.jpg"]
+    rand_meme = random.choice(memes)
+    with open(f'images/{rand_meme}', 'rb') as f:
+        # В переменную кладем файл, который преобразуется в файл библиотеки Discord
+        picture = discord.File(f)
+   # Можем передавать файл как параметр
+    await ctx.send(file=picture)
+#токен
+bot.run("")
